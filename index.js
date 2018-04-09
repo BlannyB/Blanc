@@ -5,16 +5,9 @@
  */
 
 const Discord = require('discord.js');
-const credentials = require('credentials.json');
-const config = require('config.json');
-const Manager = new Discord.ShardingManager('./bastion.js', {
-  totalShards: config.shardCount,
-  token: credentials.token
+
 });
-const log = require('./handlers/logHandler');
 
-Manager.spawn();
 
-Manager.on('launch', shard => {
-  log.info(`Launching Shard ${shard.id} [ ${shard.id + 1} of ${Manager.totalShards} ]`);
+bot.login(process.env.token);
 });
