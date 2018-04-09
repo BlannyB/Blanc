@@ -1,1 +1,1 @@
-worker: node run.cmd
+worker: node index.js
