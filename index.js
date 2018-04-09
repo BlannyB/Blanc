@@ -1,24 +1,20 @@
-const Discord = require("discord.js");
-const bot = new Discord.Client({disableEveryone: true});
+/**
+ * @file The starting point of Bastion
+ * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
+ * @license MIT
+ */
 
-bot.on("ready", async () => {
-  console.log(`${bot.user.username} is online!`);
-  bot.user.setActivity(`Hey, Wassup!`);
+const Discord = require('discord.js');
+const credentials = require('./settings/credentials.json');
+const config = require('./settings/config.json');
+const Manager = new Discord.ShardingManager('./bastion.js', {
+  totalShards: config.shardCount,
+  token: credentials.token
 });
+const log = require('./handlers/logHandler');
 
-bot.on("message", async message => {
+Manager.spawn();
 
-  if (message.author.bot) return;
-  if (message.channel.type === "dm") return;
-
-  let prefix = '-';
-  let messageArray = message.content.split(" ");
-  let cmd = messageArray[0];
-  let args = messageArray.slice(1);
-
-  if (cmd === `${prefix}ping`){
-    message.channel.send("Pong!");
-  }
+Manager.on('launch', shard => {
+  log.info(`Launching Shard ${shard.id} [ ${shard.id + 1} of ${Manager.totalShards} ]`);
 });
-
-bot.login(process.env.token);
