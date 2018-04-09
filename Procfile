@@ -1,1 +1,1 @@
-worker: node bastion.js
+worker: node index.js
