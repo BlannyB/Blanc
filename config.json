@@ -1,0 +1,17 @@
+{
+  "shardCount": 1,
+  "prefix": ";",
+  "status": "dnd",
+  "game": {
+    "type": "Playing",
+    "name": [
+      "With Blancella"
+    ],
+    "url": "",
+    "interval": 60
+  },
+  "music": {
+    "status": false,
+    "passes": 1
+  }
+}
